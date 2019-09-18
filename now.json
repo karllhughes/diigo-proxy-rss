@@ -1,3 +1,7 @@
 {
-  "builds": [{ "src": "index.js", "use": "@now/node" }]
+  "builds": [{
+    "src": "index.js",
+    "use": "@now/node"
+  }],
+  "env": {"AUTHORIZATION": "@authorization"}
 }

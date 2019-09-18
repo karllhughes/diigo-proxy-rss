@@ -27,18 +27,19 @@ const generateFeed = (data) => {
     })
   });
 
-  return feed.atom1();
+  return feed.rss2();
 }
 
 module.exports = (request, response) => {
-  if (!request.query || !request.headers['authorization']) {
-    handleError('`auth` not set on querystring', response);
+  console.log(process.env)
+  if (!request.query || (!request.headers['authorization'] && !process.env.AUTHORIZATION)) {
+    handleError('`authorization` not set', response);
   }
 
   const qs = querystring.encode(request.query);
   fetch(
     'https://secure.diigo.com/api/v2/bookmarks?' + qs,
-    {headers: {'Authorization': request.headers['authorization']}}
+    {headers: {'Authorization': request.headers['authorization'] || process.env.AUTHORIZATION}}
   )
     .then(res => res.json())
     .then(data => {
