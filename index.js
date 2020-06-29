@@ -38,7 +38,7 @@ module.exports = (request, response) => {
 
   const qs = querystring.encode(request.query);
   fetch(
-    'https://secure.diigo.com/api/v2/bookmarks?' + qs,
+    'http://secure.diigo.com/api/v2/bookmarks?' + qs,
     {headers: {'Authorization': request.headers['authorization'] || process.env.AUTHORIZATION}}
   )
     .then(res => res.json())
